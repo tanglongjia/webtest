@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tonyj.myweb.po.BsUser">
+	
+	<resultMap type="com.tonyj.myweb.po.BsUser" id="userResult">
+		<result property="id" column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<result property="loginName" column="loginName" />
+		<result property="passWord" column="passWord" />
+		<result property="trueName" column="trueName" />
+		<result property="sex" column="sex" />
+		<result property="telephone" column="telephone" />
+		<result property="age" column="age" />
+		<result property="email" column="email" />
+		<result property="remark" column="remark" />
+		<result property="lastLoginTime" column="lastLoginTime" />
+		<result property="created" column="created" />
+		<result property="createdby" column="createdby" />
+		<result property="updated" column="updated" />
+		<result property="updatedby" column="updatedby" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="selectSingle" parameterType="int" resultMap="userResult">
+		select loginName,passWord,id
+		from bs_user where id=#{id}
+ 	</select>
+ 	
+ 	<select id="selectPage" resultMap="userResult">
+		select *
+		from bs_user 
+		where 1=1 and status = 1
+		<if test="trueName != null and trueName !=''">  
+        	and trueName = #{trueName}  
+    	</if>
+    	<if test="sex != null and sex !='' ">  
+        	and sex = #{sex}  
+    	</if> 
+    	<if test="telephone != null and telephone!='' ">  
+        	and telephone LIKE #{telephone}  
+    	</if>  
+ 	</select>
+ 	
+ 	<select id="findByUser" parameterType="user" resultMap="userResult">
+		select loginName,passWord,id
+		from bs_user
+		where loginName=#{loginName}
+		and passWord =#{passWord} 	
+ 	</select>
+ 	
+ 	<select id="getAll"  resultMap="userResult">
+		select loginName,passWord,id
+		from bs_user
+ 	</select>
+
+	<insert id="insert" parameterType="user">
+		<!-- 
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select _nextval('ad_user_seq')
+		</selectKey>
+		-->
+	 <![CDATA[
+		insert into
+		bs_user(loginName,passWord) values(#{loginName},#{passWord})
+		]]>
+ 	</insert>
+
+	<update id="update" parameterType="user">
+		update bs_user set
+		loginName=#{loginName},passWord=#{passWord} where id=#{id}
+ 	</update>
+ 	
+	<delete id="delete" parameterType="int">
+		delete from bs_user where
+		id=#{id}
+	</delete>
+
+</mapper>

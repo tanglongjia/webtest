@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">   <!-- dtd约束，一定要拷过去啊。下面的根据具体应用，改改就可以了 -->
+<configuration>
+	<!--  指定与数据库相关的配置资源文件名，若下面的dataSource所需要的url等直接配置编码在此文件，那么此properties也可以去掉 -->
+	<properties resource="db.properties"/>  
+	<!-- 给指定的类定义别名，这样在后面的Mapping映射文件中，可以直接写别名，可以不用写完整限定类名了 -->
+	<typeAliases>
+		<typeAlias alias="user" type="com.tonyj.myweb.po.BsUser" />
+		<typeAlias alias="resource" type="com.tonyj.myweb.po.BsResource" />
+	</typeAliases>
+	
+	<plugins>
+		<plugin interceptor="com.tonyj.frame.plugin.PaginationPlugin">
+			<property name="dialect" value="${dialect}"/>  
+        	<property name="pageSqlId" value=".*selectPage.*"/>  
+		</plugin>
+	</plugins>
+		<!-- JDBC事务管理   数据源 连接池相关 所需要数据库连接的相关配置信息，在db.properties有指定
+	<environments default="default">
+		<environment id="default">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">  
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>-->
+	<!-- 映射文件 将sql、POJO、dao层映射连接在一起，以可配置的方式来组织。从此SQL的写法与dao层无关了。 -->
+	<mappers>
+	</mappers>
+</configuration>

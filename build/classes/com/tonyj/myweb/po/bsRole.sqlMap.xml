@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tonyj.myweb.po.BsRole" >
+  <resultMap id="BaseResultMap" type="com.tonyj.myweb.po.BsRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roleName" property="rolename" jdbcType="VARCHAR" />
+    <result column="roleDesc" property="roledesc" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="updatedby" property="updatedby" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleName, roleDesc, created, createdby, updated, updatedby, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bs_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectPage" parameterType="com.tonyj.myweb.po.BsRole" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from bs_role
+    where 1 =1 
+    <if test="rolename!=null and rolename!=''">
+    	and rolename = #{rolename}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bs_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tonyj.myweb.po.BsRole" >
+    insert into bs_role (id, roleName, roleDesc, 
+      created, createdby, updated, 
+      updatedby, status)
+    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{roledesc,jdbcType=VARCHAR}, 
+      sysdate(), #{createdby,jdbcType=INTEGER}, #{updated,jdbcType=TIMESTAMP}, 
+      #{updatedby,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="java.util.Map" >
+    update bs_role
+    set
+      <if test="rolename != null and rolename !='' " >
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="roledesc != null and roledesc !='' " >
+        roleDesc = #{roledesc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null " >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    updated=sysDate() 
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

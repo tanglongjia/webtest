@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<diskStore path="java.io.tmpdir" />
+	<cacheManagerEventListenerFactory class="" properties=""/>
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="100000"
+            eternal="true"
+            overflowToDisk="true"
+            diskSpoolBufferSizeMB="30"
+            maxElementsOnDisk="10000000"
+            timeToIdleSeconds="130" timeToLiveSeconds="140" 
+            memoryStoreEvictionPolicy="LRU" />
+           
+	<!-- Special objects setting. -->
+<!--	<cache name="referenceCache" -->
+<!--		overflowToDisk="true" eternal="true" timeToLiveSeconds="3600" timeToIdleSeconds="3600" -->
+<!--		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"/>-->
+</ehcache>
+

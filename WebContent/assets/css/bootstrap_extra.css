@@ -1,0 +1,14 @@
+.table > thead > tr > td.trSelectSuccess,
+.table > tbody > tr > td.trSelectSuccess,
+.table > tfoot > tr > td.trSelectSuccess,
+.table > thead > tr > th.trSelectSuccess,
+.table > tbody > tr > th.trSelectSuccess,
+.table > tfoot > tr > th.trSelectSuccess,
+.table > thead > tr.trSelectSuccess > td,
+.table > tbody > tr.trSelectSuccess > td,
+.table > tfoot > tr.trSelectSuccess > td,
+.table > thead > tr.trSelectSuccess > th,
+.table > tbody > tr.trSelectSuccess > th,
+.table > tfoot > tr.trSelectSuccess > th {
+    background-color: #fdf495;
+}

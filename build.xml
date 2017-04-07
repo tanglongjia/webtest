@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<project name="bootstrap" default="deploy" basedir=".">
+	<!--定义打包编译的路径-->
+	<property name="webapp.name"  value="webtest" description="打出的war包名称"/>   
+    <property name="build.dir"  value="build" description="输出目录"/>
+	<property name="build.war.dir"  value="${build.dir}/war" description="war包的输出目录"/>
+    <property name="build.web.dir"  value="${build.dir}/WEB-INF" description="web配置输出目录"/>
+    <property name="build.web.class.dir"  value="${build.web.dir}/classes" description="web项目中的class文件输出目录"/>   
+    <property name="build.web.lib.dir"  value="${build.web.dir}/lib" description="web引用的jar包输出目录"/>
+    <property name="src.dir"  value="src" description="源代码目录"/>
+    <property name="WebRoot.dir"  value="${basedir}/WebContent" description="配置和页面等文件目录"/>
+    <property name="lib.dir"  value="${WebRoot.dir}/WEB-INF/lib" description="源lib目录"/>
+    <property name="encoding"  value="utf-8" description="文件编码"/>
+	<property name="version"  value="1.0" description="项目版本号"/>
+	<!--日期-->
+	<tstamp>
+		<format property="createdate" pattern="yyyyMMddhhmm" />
+	</tstamp>
+    <!--项目的classpath路径-->
+    <path id="project.classpath">
+    	<fileset dir="${lib.dir}">
+    		<include name="*.jar"/>
+    	</fileset>
+    	<pathelement path="${basedir}/WebRoot/WEB-INF/lib"/>    	
+    </path>
+
+    <!--1.创建相关的文件目录-->
+    <target name="init">   
+        <mkdir dir="${build.dir}"/> 
+    	<mkdir dir="${build.war.dir}"/>   
+        <mkdir dir="${build.web.dir}"/>   
+        <mkdir dir="${build.web.class.dir}"/>   
+        <mkdir dir="${build.web.lib.dir}"/> 
+    </target> 
+
+    <!--2.清空上次编译的classes文件-->
+    <target name="clean" description="Delete old build and dist directories">   
+        <delete dir="${build.web.class.dir}" includes="**/*.class"/>    
+    </target>   
+
+    <!--3.编译源文件-->
+    <target name="compile" depends="init,clean" description="Compile Java sources" >   
+    	<!--编译java文件成class文件到指定目录-->
+    	<javac srcdir="${src.dir}"  destdir="${build.web.class.dir}" optimize="true">   
+    		<compilerarg line="-encoding utf-8"/>
+            <classpath refid="project.classpath"/>   
+        </javac>   
+        <!--复制编译后源代码目录中所有的非java文件-->
+        <copy todir="${build.web.class.dir}">   
+            <fileset dir="${src.dir}" excludes="**/*.java"/>   
+        </copy> 
+        <!--复制源代码以外的其他文件-->
+        <copy todir="${build.dir}">   
+          <fileset dir="${WebRoot.dir}" excludes="**/*.java"/>   
+        </copy> 
+    </target>
+
+    <!--4.打war包-->
+    <target name="deploy" description="Install application to servlet container" depends="compile"> 
+       <!--删除之前的打的包-->  
+       <delete dir="${build.war.dir}"/>    
+       <war destfile="${build.war.dir}/${webapp.name}-${createdate}-${version}.war" basedir="${build.dir}" webxml="${build.dir}/WEB-INF/web.xml">     
+            <lib dir="${build.web.lib.dir}"/>    
+            <classes dir="${build.web.class.dir}"/>            
+        </war>    
+    </target> 
+</project>   

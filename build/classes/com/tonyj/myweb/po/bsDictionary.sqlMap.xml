@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tonyj.myweb.dao.BsDictionary" >
+  <resultMap id="BaseResultMap" type="com.tonyj.myweb.po.BsDictionary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dicCode" property="diccode" jdbcType="VARCHAR" />
+    <result column="dicName" property="dicname" jdbcType="VARCHAR" />
+    <result column="dicNum" property="dicnum" jdbcType="VARCHAR" />
+    <result column="dicKey" property="dickey" jdbcType="VARCHAR" />
+    <result column="dicValue" property="dicvalue" jdbcType="VARCHAR" />
+    <result column="createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="DATE" />
+    <result column="updated" property="updated" jdbcType="DATE" />
+    <result column="updatedby" property="updatedby" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dicCode, dicName, dicNum, dicKey, dicValue, createdby, created, updated, updatedby, 
+    status
+  </sql>
+  <select id="getAll" resultType="java.util.HashMap" parameterType="java.util.Map" >
+    select distinct dicCode, dicName, dicNum,created
+    from bs_dictionary
+     where status = 1
+    <if test="dictName !=null and dictName!='' ">
+    	and dicName like concat(concat('%',#{dictName}),'%')
+    </if>
+  </select>
+  
+  <select id="selectPage" resultMap="BaseResultMap" parameterType="com.tonyj.myweb.po.BsDictionary">
+  	select 
+    <include refid="Base_Column_List" />
+    from bs_dictionary
+    where status = 1
+    <if test="dicName !=null and dicName!='' ">
+    	and dicName = #{dicName}
+    </if>
+  </select>
+  
+  	<select id="getField" resultType="java.util.HashMap" parameterType="java.util.Map">
+  		select <include refid="Base_Column_List" />
+    	from bs_dictionary
+     	where status = 1 and dicCode = #{dictCode}
+  	</select>
+  	
+  	<insert id="batchSaveDict"  parameterType="java.util.List">
+  		insert into bs_dictionary(dicCode,dicName,dicNum,dicKey,dicValue,createdby,created,updated,updatedby,status) 
+  		values
+  		 <foreach collection="list" item="item" index="index" separator="," >
+  			(
+	  			#{item.diccode},
+	  			#{item.dicname},
+	  			#{item.dicnum},
+	  			#{item.dickey},
+	  			#{item.dicvalue},
+	  			#{item.createdby},
+	  			sysdate(),
+	  			#{item.updated},
+	  			#{item.updatedby},
+	  			#{item.status}
+  			)
+  		</foreach>
+  	</insert>
+  	
+  	<delete id="delDict" parameterType="java.util.Map">
+		delete from bs_dictionary where diccode = #{dicCode}
+	</delete>
+	
+	<update id="updateDict" parameterType="java.util.Map">
+		update bs_dictionary
+		set 
+		<if test="dicname!=null and dicname!=''">
+			dicName = #{dicname},
+		</if>
+		<if test="dickey!=null and dickey!=''">
+			dicKey = #{dickey},
+		</if>
+		<if test="dicvalue!=null and dicvalue!=''">
+			dicValue = #{dicvalue},
+		</if>
+		updated = sysdate() 
+		where dicCode = #{dicCode}
+	</update>
+	
+</mapper>
