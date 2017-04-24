@@ -1,6 +1,7 @@
 package com.tonyj.myweb.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,7 +38,11 @@ public class BsUserService {
 		}
 	}
 	
-	public BsUser addUser(BsUser userInfo){
-		return bsUserDao.insert(userInfo);
+	public void saveUser(BsUser userInfo)throws Exception{
+		bsUserDao.insertUser(userInfo);
+	}
+	
+	public List<BsUser> getUserByLogin(Map map){
+		return bsUserDao.getUserByLogin(map);
 	}
 }

@@ -20,17 +20,18 @@
 		<result property="updated" column="updated" />
 		<result property="updatedby" column="updatedby" />
 		<result property="status" column="status" />
+		<result property="userType" column="userType" />
 	</resultMap>
 
 	<select id="selectSingle" parameterType="int" resultMap="userResult">
-		select loginName,passWord,id
+		select loginName,passWord,id,userType
 		from bs_user where id=#{id}
  	</select>
  	
  	<select id="selectPage" resultMap="userResult">
 		select *
 		from bs_user 
-		where 1=1 and status = 1
+		where 1=1 
 		<if test="trueName != null and trueName !=''">  
         	and trueName = #{trueName}  
     	</if>
@@ -38,7 +39,7 @@
         	and sex = #{sex}  
     	</if> 
     	<if test="telephone != null and telephone!='' ">  
-        	and telephone LIKE #{telephone}  
+        	and telephone LIKE concat(concat('%',#{telephone}),'%')
     	</if>  
  	</select>
  	
@@ -55,14 +56,10 @@
  	</select>
 
 	<insert id="insert" parameterType="user">
-		<!-- 
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			select _nextval('ad_user_seq')
-		</selectKey>
-		-->
 	 <![CDATA[
 		insert into
-		bs_user(loginName,passWord) values(#{loginName},#{passWord})
+		bs_user(trueName,telephone,loginName,passWord,age,sex,userType,status,created) 
+		values(#{trueName},#{telephone},#{loginName},#{passWord},#{age},#{sex},#{userType},#{status},sysDate())
 		]]>
  	</insert>
 
@@ -76,4 +73,9 @@
 		id=#{id}
 	</delete>
 
+	<select id="getUserByLogin" parameterType="java.util.HashMap" resultType="user">
+		select *
+		from bs_user
+		where loginName=#{loginName} and passWord=#{passWord} 
+	</select>
 </mapper>

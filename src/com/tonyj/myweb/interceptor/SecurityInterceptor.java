@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tonyj.myweb.po.BsUser;
+
 /**
  * 权限拦截器
  * 
@@ -51,28 +53,20 @@ public class SecurityInterceptor implements HandlerInterceptor {
 		String contextPath = request.getContextPath();
 		String url = requestUri.substring(contextPath.length());
 		System.out.println("uri:"+url);
-//		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(GlobalConstants.SESSION_INFO);
-//		//判断是否包含在菜单权限里
-//
-//		if (  excludeUrls.contains(url)) {// 如果要访问的资源是不需要验证的
-//			return true;
-//		}
-//		
-//		if ((sessionInfo == null) || (sessionInfo.getId() == 0)) {// 如果没有登录或登录超时
-//			request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
-//			request.getRequestDispatcher("/error/noSession.jsp").forward(request, response);
-//			return false;
-//		}
-//		
-//		if(sessionInfo.getResourceAllList()!=null && !sessionInfo.getResourceAllList().contains(url)){
-//			return true;
-//		}
-//
-//		if (sessionInfo.getResourceList()==null || sessionInfo.getResourceList().isEmpty() || !sessionInfo.getResourceList().contains(url)) {// 如果当前用户没有访问此资源的权限
-//			request.setAttribute("msg", "您没有访问此资源的权限！<br/>请联系超管赋予您<br/>[" + url + "]<br/>的资源访问权限！");
-//			request.getRequestDispatcher("/error/noSecurity.jsp").forward(request, response);
-//			return false;
-//		}
+		BsUser bsUser = (BsUser) request.getSession().getAttribute("bsUser");
+		// 如果要访问的资源是不需要验证的
+		for (String eurl : excludeUrls) {
+             if (requestUri.endsWith(eurl)) {
+                 return true;
+             }
+         }
+		
+		if (bsUser == null) {// 如果没有登录或登录超时
+			request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
+			response.sendRedirect(contextPath+"/login.jsp");
+			return false;
+		}
+		
 		return true;
 	}
 }

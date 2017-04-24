@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -28,7 +27,7 @@ import com.tonyj.myweb.service.BsUserService;
 public class BsUserController extends BaseController {
 
 	@Autowired
-	private BsUserService BsUserService;
+	private BsUserService bsUserService;
 	
 	@RequestMapping(value="/showUser",method = RequestMethod.GET)
 	public String userIndex(BsUser user,Page page){
@@ -37,7 +36,7 @@ public class BsUserController extends BaseController {
 	
     @RequestMapping(value="/userList",method = RequestMethod.GET)
     public ModelAndView getAllUser(HttpServletRequest request, HttpServletResponse response,BsUser user,Page page){
-    	page = BsUserService.selectPage(user,page);
+    	page = bsUserService.selectPage(user,page);
     	Map<String,String> dictMap = new HashMap<String,String>();
     	dictMap.put("0", "女");
     	dictMap.put("1", "男");
@@ -53,7 +52,7 @@ public class BsUserController extends BaseController {
     
     @RequestMapping(value="/userData")
     public ModelAndView getUserData(HttpServletRequest request, HttpServletResponse response,BsUser user,Page page,ModelMap model){
-    	page = BsUserService.selectPage(user,page);
+    	page = bsUserService.selectPage(user,page);
     	Map<String,String> dictMap = new HashMap<String,String>();
     	dictMap.put("0", "女");
     	dictMap.put("1", "男");
@@ -62,13 +61,23 @@ public class BsUserController extends BaseController {
     	return new ModelAndView(Constant.PAGE_USER_PATH+"userData", model);
     }
     
-    @RequestMapping("/userAdd")
-    @ResponseBody
-    public String userAdd(BsUser user){
-    	user.setLoginName("test");
-    	user.setPassWord("test");
-    	BsUserService.addUser(user);
-    	return "";
+    
+    /**
+     * @param request
+     * @param response
+     * @param user
+     * @param page
+     * @param model
+     * @return 保存操作
+     */
+    @RequestMapping(value="/saveUser")
+    public ModelAndView saveUser(HttpServletRequest request, HttpServletResponse response,BsUser user,Page page,ModelMap model){
+    	try {
+			bsUserService.saveUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
     
 }

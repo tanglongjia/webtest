@@ -29,6 +29,8 @@ public class BsUser extends BaseEntity {
 	
 	private String remark;
 	
+	private String userType;
+	
 	/**
 	 * 所属部门
 	 */
@@ -112,6 +114,14 @@ public class BsUser extends BaseEntity {
 
 	public void setBsDepart(BsDepartment bsDepart) {
 		this.bsDepart = bsDepart;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	
 	

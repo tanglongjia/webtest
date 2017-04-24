@@ -29,5 +29,16 @@ public class BsResourceService {
 	public Page selectListPage(BsResource bsRes,Page page){
 		return bsResourceDao.selectListPage(bsRes,page);
 	}
-
+	
+	public BsResource getResByPk(Integer id){
+		return bsResourceDao.getResByPk(id);
+	}
+	
+	public void updateResByPk(Map map){
+		 bsResourceDao.updateResByPk(map);
+	}
+	
+	public void saveRes(BsResource bsRes){
+		 bsResourceDao.savaRes(bsRes);
+	}
 }

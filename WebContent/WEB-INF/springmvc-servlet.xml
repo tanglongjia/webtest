@@ -25,7 +25,7 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/" />
+		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
@@ -42,13 +42,10 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.tonyj.myweb.interceptor.SecurityInterceptor">
-				<!-- 不需要权限验证的地址 -->
 				<property name="excludeUrls">
 					<list>
-						<value>/index</value>
-						<value>/login</value>
 						<value>/logout</value>
-						<value>/access</value>
+						<value>/doLogin</value>
 					</list>
 				</property>
 			</bean>

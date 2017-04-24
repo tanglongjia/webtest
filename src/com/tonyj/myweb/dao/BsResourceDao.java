@@ -24,4 +24,16 @@ public class BsResourceDao extends MyBatisDao<BsResource> {
 	public Page selectListPage(BsResource bsRes,Page page){
 		return super.selectPage(bsRes, page, "selectPage");
 	}
+	
+	public BsResource getResByPk(Integer id){
+		return this.getSqlSession().selectOne("getResByPk",id);
+	}
+	
+	public void updateResByPk(Map map){
+		 this.getSqlSession().update("updateResByPk", map);
+	}
+	
+	public void savaRes(BsResource bsRes){
+		this.getSqlSession().insert("com.tonyj.myweb.po.BsResource.insert", bsRes);
+	}
 }
