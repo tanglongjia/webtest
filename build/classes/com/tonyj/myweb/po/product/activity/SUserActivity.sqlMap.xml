@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tonyj.myweb.po.product.activity.SUserActivity" >
+  <resultMap id="BaseResultMap" type="com.tonyj.myweb.po.product.activity.SUserActivity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="activityId" property="activityid" jdbcType="INTEGER" />
+    <result column="activityName" property="activityname" jdbcType="VARCHAR" />
+    <result column="compete" property="compete" jdbcType="INTEGER" />
+    <result column="activityDesc" property="activitydesc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="DATE" />
+    <result column="createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="DATE" />
+    <result column="updatedby" property="updatedby" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, userId, userName, activityId, activityName, compete, activityDesc, status, created, 
+    createdby, updated, updatedby
+  </sql>
+  
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_user_activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="mbIsExits"  resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select 
+    <include refid="Base_Column_List" />
+    from s_user_activity
+    where activityId = #{activityId} and userId=#{userId}
+  </select>
+  
+  
+  <select id="selectPage" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from s_user_activity
+    where 1=1
+    <if test="activityname != null and activityname!='' ">  
+        	and activityname LIKE concat(concat('%',#{activityname}),'%')
+    </if>
+    <if test="username != null and username!='' ">  
+        	and username LIKE concat(concat('%',#{username}),'%')
+    </if>
+    <if test="userid != null ">  
+        	and userid=#{userid}
+    </if>
+    order by created desc
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from s_user_activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.tonyj.myweb.po.product.activity.SUserActivity" >
+    insert into s_user_activity ( userId, userName, 
+      activityId, activityName, compete, 
+      activityDesc, status, created
+      )
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{activityid,jdbcType=INTEGER}, #{activityname,jdbcType=VARCHAR}, #{compete,jdbcType=INTEGER}, 
+      #{activitydesc,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, sysDate()
+
+      )
+  </insert>
+  
+  <update id="update" parameterType="com.tonyj.myweb.po.product.activity.SUserActivity" >
+    update s_user_activity
+    set userId = #{userid,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      activityId = #{activityid,jdbcType=INTEGER},
+      activityName = #{activityname,jdbcType=VARCHAR},
+      compete = #{compete,jdbcType=INTEGER},
+      activityDesc = #{activitydesc,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      updated = sysDate()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

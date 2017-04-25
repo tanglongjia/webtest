@@ -7,7 +7,10 @@
 	<select id="getBsResourceByParentId" parameterType="java.util.Map" resultType="com.tonyj.myweb.po.BsResource">
 		select id,menuCode,menuName,menuUrl,menuLevel,isLeafNode,parentId,menuDesc,menuImgPath
 		from bs_resource
-		where parentId=#{parentId} and status = 1
+		where parentId=#{parentId} and status = 1 
+		<if test="userType !=null">
+			and userType = #{userType}
+		</if>
 	</select>
 	
 	<select id="getTree" parameterType="java.util.Map" resultType="com.tonyj.myweb.constant.TreeBean">

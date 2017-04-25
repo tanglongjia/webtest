@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tonyj.myweb.po.product.activity.SActivity" >
+  <resultMap id="BaseResultMap" type="com.tonyj.myweb.po.product.activity.SActivity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activityName" property="activityname" jdbcType="VARCHAR" />
+    <result column="activityContent" property="activitycontent" jdbcType="VARCHAR" />
+    <result column="activityDate" property="activitydate"  />
+    <result column="end" property="end" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="created" property="created"  />
+    <result column="createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="updated" property="updated"  />
+    <result column="updatedby" property="updatedby" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, activityName, activityContent, activityDate, end, status, created, createdby, 
+    updated, updatedby
+  </sql>
+  
+  <select id="selectPage" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from s_activity 
+		where 1=1 
+    	<if test="activityname != null and activityname!='' ">  
+        	and activityname LIKE concat(concat('%',#{activityname}),'%')
+    	</if>  
+  </select>
+  
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from s_activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tonyj.myweb.po.product.activity.SActivity" >
+    insert into s_activity ( activityName, activityContent, 
+      activityDate, end, status, 
+      created, createdby, updated, 
+      updatedby)
+    values ( #{activityname,jdbcType=VARCHAR}, #{activitycontent,jdbcType=VARCHAR}, 
+      #{activitydate,jdbcType=DATE}, #{end,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      sysDate(), #{createdby,jdbcType=INTEGER}, #{updated,jdbcType=DATE}, 
+      #{updatedby,jdbcType=INTEGER})
+  </insert>
+  <update id="update" parameterType="com.tonyj.myweb.po.product.activity.SActivity" >
+    update s_activity
+    set activityName = #{activityname,jdbcType=VARCHAR},
+      activityContent = #{activitycontent,jdbcType=VARCHAR},
+      activityDate = #{activitydate,jdbcType=DATE},
+      end = #{end,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      updated = sysDate()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

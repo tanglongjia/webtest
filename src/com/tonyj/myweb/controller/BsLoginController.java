@@ -31,7 +31,12 @@ public class BsLoginController extends BaseController {
 		Map paramMap = new HashMap();
 		paramMap.put("loginName", request.getParameter("username"));
 		paramMap.put("passWord", request.getParameter("password"));
-		List<BsUser> userList = bsUserService.getUserByLogin(paramMap);
+		List<BsUser> userList = null;
+		try {
+			userList = bsUserService.getUserByLogin(paramMap);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		if(userList ==null || userList.size() == 0){
 			try {
 				MessageStreamResult.msgStreamResult(response, "0");

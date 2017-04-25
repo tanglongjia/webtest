@@ -29,6 +29,8 @@ public class BsResource extends BaseEntity {
 	private List<BsResource> childList=new ArrayList<BsResource>();
 	
 	private int parentId;
+	
+	private int userType;
 
 	public String getMenuCode() {
 		return menuCode;
@@ -100,6 +102,14 @@ public class BsResource extends BaseEntity {
 
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 	
 	

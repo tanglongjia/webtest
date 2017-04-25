@@ -12,6 +12,8 @@
 							<th>No</th>
 							<th>TrueName</th>
 							<th>Telephone</th>
+							<th>Email</th>
+							<th>Address</th>
 							<th>Age</th>
 							<th>Sex</th>
 							<th>LoginName</th>
@@ -27,6 +29,8 @@
 								<td>${user.id }</td>
 								<td>${user.trueName}</td>
 								<td>${user.telephone}</td>
+								<td>${user.email}</td>
+								<td>${user.address}</td>
 								<td>${user.age }</td>
 								<td>
 									<c:if test="${user.sex==1 }">
@@ -41,10 +45,10 @@
 								<td><fmt:formatDate value="${user.created }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>
 									<c:if test="${user.userType==0 }">
-										admin
+										leader
 									</c:if>
 									<c:if test="${user.userType==1 }">
-										user
+										member
 									</c:if>
 								</td>
 								<td>
@@ -64,3 +68,4 @@
 	</div>
 </div>
 <input type="hidden" id="pageTotal" value="${page.totalResult}"/>
+<input type="hidden" id="userId" />

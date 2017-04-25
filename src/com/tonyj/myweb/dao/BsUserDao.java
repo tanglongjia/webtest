@@ -12,23 +12,27 @@ import com.tonyj.myweb.po.BsUser;
 @Repository
 public class BsUserDao extends MyBatisDao<BsUser> {
 
-	public List<BsUser> getAll(){
+	public List<BsUser> getAll()throws Exception{
 		return this.getSqlSession().selectList("getAll");
 	}
 	
-	public List<BsUser> findByUser(BsUser userInfo){
+	public List<BsUser> findByUser(BsUser userInfo)throws Exception{
 		return this.getSqlSession().selectList("findByUser",userInfo);
 	}
 	
-	public Page selectPage(BsUser userInfo,Page page){
+	public Page selectPage(BsUser userInfo,Page page)throws Exception{
 		return this.selectPage(userInfo,page,"selectPage");
 	}
 	
-	public List<BsUser> getUserByLogin(Map map){
+	public List<BsUser> getUserByLogin(Map map)throws Exception{
 		return this.getSqlSession().selectList("getUserByLogin",map);
 	}
 	
 	public void insertUser(BsUser user)throws Exception{
 		this.insert(user);
+	}
+	
+	public BsUser getUserById(Integer id)throws Exception{
+		return this.selectSingle(id);
 	}
 }

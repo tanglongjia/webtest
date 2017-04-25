@@ -58,6 +58,10 @@
         <link rel="stylesheet" href="<%=basePath %>assets/plugins/bootstrap-iconpicker/icon-fonts/typicons-2.0.6/css/typicons.min.css"/>
         <link rel="stylesheet" href="<%=basePath %>assets/plugins/bootstrap-iconpicker/icon-fonts/weather-icons-1.2.0/css/weather-icons.min.css"/>
 		<link rel="stylesheet" href="<%=basePath %>assets/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css"/>
+		<!-- jquery-confirm-->
+		<link rel="stylesheet" href="<%=basePath %>assets/plugins/jquery-confirm/jquery-confirm.min.css"/>
+		<link href="<%=basePath %>assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+		<link href="<%=basePath %>assets/plugins/bootstrap-datepicker/css/datepicker-theme.css" rel="stylesheet" />
 		<!-- end: CSS file-->	
 		<!-- Head Libs -->
 		<script src="<%=basePath %>assets/plugins/modernizr/js/modernizr.js"></script>
@@ -157,12 +161,12 @@
 					<!-- Userbox -->
 					<div class="userbox">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-user"></i>
 							<div class="profile-info">
-								<span class="name">${ sessionScope.bsUser.trueName}</span>
+								<span class="name">Welcome ${ sessionScope.bsUser.trueName}</span>
 							</div>			
-							<i class="fa custom-caret"></i>
 						</a>
-						<a onclick="logout()" style="cursor:pointer;"><i class="fa fa-power-off"></i>logout</a>
+						<a onclick="logout()" style="cursor:pointer;"><i class="fa fa-power-off"></i>&nbsp;&nbsp;logout</a>
 						<!-- <div class="dropdown-menu">
 							<ul class="list-unstyled">
 								<li class="dropdown-menu-header bk-bg-white bk-margin-top-15">						
@@ -216,13 +220,13 @@
 					<!-- Sidebar Footer-->
 					<div class="sidebar-footer">	
 						<ul class="sidebar-terms">
-							<li><a href="#">团队</a></li>
-							<li><a href="#">个人</a></li>
-							<li><a href="#">帮助</a></li>
-							<li><a href="#">关于</a></li>
+							<li><a href="#">Team</a></li>
+							<li><a href="#">Person</a></li>
+							<li><a href="#">Help</a></li>
+							<li><a href="#">About</a></li>
 						</ul>
 						<div class="copyright text-center">
-							<small>TonyJ <i class="fa fa-coffee"></i> 56帮你工作室  tonyj0602@qq.com</small>
+							<small>TonyJ <i class="fa fa-coffee"></i> Copyright &copy; 2017 56HeplWorkSpace</small>
 						</div>					
 					</div>
 					<!-- End Sidebar Footer-->
@@ -287,7 +291,7 @@
 								menuHtml = menuHtml + '<li><a onclick="LoadAjaxContent(\''+data[index].menuUrl+'\',\''+data[index].menuName+'\',null)"><i class="fa fa-laptop" aria-hidden="false"></i><span>'+data[index].menuName+'</span></a></li>';
 							}
 						});
-						$(menuHtml).appendTo("#menuDiv")
+						$(menuHtml).appendTo("#menuDiv");
 				     },  
 				     error : function() {  
 				     }  
@@ -352,6 +356,10 @@
 		<script type="text/javascript" src="<%=basePath %>assets/plugins/bootstrap-iconpicker/js/iconset/iconset-glyphicon.min.js"></script>
 		<!-- Bootstrap-Iconpicker -->
 		<script type="text/javascript" src="<%=basePath %>assets/plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js"></script>
+		<!-- jquery-confirm -->
+		<script type="text/javascript" src="<%=basePath %>assets/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+		<!-- bootstrap-datepicker js -->
+		<script src="<%=basePath %>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 		<!-- end: JavaScript-->
 		<script type="text/javascript">
 			function logout(){

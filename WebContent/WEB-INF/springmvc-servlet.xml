@@ -37,7 +37,7 @@
 		<!-- <property name="uploadTempDir" value="/upload/"/> -->
 	</bean>
 
-	<!--5：拦截器 -->
+	<!--5：拦截器 用于登录权限验证 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />

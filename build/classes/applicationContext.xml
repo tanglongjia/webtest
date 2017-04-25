@@ -41,6 +41,7 @@
 			<list>
 				<!-- 表示在spring.mybatis.bean包或以下所有目录中，以sqlMap.xml结尾所有文件 --> 
 				<value>classpath:com/tonyj/myweb/po/*sqlMap.xml</value>
+				<value>classpath:com/tonyj/myweb/po/product/activity/*sqlMap.xml</value>
 			</list>
 		</property>
 	</bean>

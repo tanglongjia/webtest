@@ -1,5 +1,6 @@
 package com.tonyj.myweb.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.tonyj.frame.web.BaseController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.constant.TreeBean;
 import com.tonyj.myweb.po.BsResource;
+import com.tonyj.myweb.po.BsUser;
 import com.tonyj.myweb.service.BsResourceService;
 
 @Controller
@@ -39,14 +41,27 @@ public class BsResourceController extends BaseController {
 	 */
 	@RequestMapping(value="/getLeftMenu", method=RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getLeftMenu(){
+    public String getLeftMenu(HttpServletRequest request, HttpServletResponse response){
 		Map<String,Integer> paramMap= new HashMap<String,Integer>();
 		paramMap.put("parentId", 0);
 		List<BsResource> bsResouceList = bsResourceService.getLeftMenu(paramMap);
 		if(!bsResouceList.isEmpty()){
+			//从session中获取userid
+			BsUser bsUser = null;
+			if(request.getSession().getAttribute("bsUser") == null){
+				String contextPath = request.getContextPath();
+				try {
+					response.sendRedirect(contextPath+"/login.jsp");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else{
+				bsUser = (BsUser) request.getSession().getAttribute("bsUser");
+			}
 			for (BsResource bsResource : bsResouceList) {
 					Map<String,Integer> pMap = new HashMap<String,Integer>();
 					pMap.put("parentId", bsResource.getId());
+					pMap.put("userType", bsUser.getUserType());
 					List<BsResource> childList = bsResourceService.getLeftMenu(pMap);
 					bsResource.setChildList(childList);
 			}

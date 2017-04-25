@@ -330,7 +330,7 @@
 			status:$("#addResStatus").val(),
 			menuCode:$("#addMenuCode").val(),
 			isLeafNode:$("#addLeafNode").val(),
-			parentId:$("parentId").val()
+			parentId:$("#parentId").val()
 		},
 		success:function(str){
 			$("#addResModal").modal('hide');
