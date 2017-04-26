@@ -43,4 +43,8 @@ public class BsUserService {
 	public void deleteUser(Integer id)throws Exception{
 		bsUserDao.delete(id);
 	}
+	
+	public void updatePwd(Map map)throws Exception{
+		bsUserDao.updatePwd(map);
+	}
 }

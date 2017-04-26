@@ -79,85 +79,9 @@
 				</ul>
 				<!-- Navbar Left -->
 				<div class="navbar-left">
-					<!-- Search Form 					
-					<form class="search navbar-form">
-						<div class="input-group input-search">
-							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-							</span>
-						</div>						
-					</form>-->
 				</div>
 				<!-- Navbar Right -->
 				<div class="navbar-right">
-					<!-- Notifications 
-					<ul class="notifications hidden-sm hidden-xs">
-						<li>
-							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-								<i class="fa fa-tasks"></i>
-								<span class="badge">1</span>
-							</a>
-							<ul class="dropdown-menu update-menu" role="menu">
-								<li><a href="#"><i class="fa fa-database bk-fg-primary"></i> Database </a></li>
-								<li><a href="#"><i class="fa fa-bar-chart-o bk-fg-primary"></i> Connection </a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-								<i class="fa fa-envelope"></i>
-								<span class="badge">1</span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-header">
-									<strong>Messages</strong>
-									<div class="progress progress-xs  progress-striped active">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-											60%
-										</div>
-									</div>
-								</li>
-								<li class="avatar">
-									<a href="page-inbox.html">
-										<img class="avatar" src="assets/img/avatar1.jpg" alt="" />
-										<div><div class="point point-primary point-lg"></div>New message</div>
-										<span><small>1 minute ago</small></span>							
-									</a>
-								</li>
-								<li class="dropdown-menu-footer text-center">
-									<a href="page-inbox.html">View all messages</a>
-								</li>	
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-								<i class="fa fa-bell"></i>
-								<span class="badge">1</span>
-							</a>
-							<ul class="dropdown-menu list-group">
-								<li class="dropdown-menu-header">
-									<strong>Notifications</strong>
-									<div class="progress progress-xs  progress-striped active">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-											60%
-										</div>
-									</div>
-								</li>
-								<li class="list-item">
-									<a href="#">
-										<div class="pull-left">
-										   <i class="fa fa-cogs bk-fg-primary"></i>
-										</div>
-										<div class="media-body clearfix">
-											<div>New Settings</div>
-											<h6>There are new settings available</h6>
-										</div>								
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					 End Notifications -->
 					<!-- Userbox -->
 					<div class="userbox">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -167,18 +91,7 @@
 							</div>			
 						</a>
 						<a onclick="logout()" style="cursor:pointer;"><i class="fa fa-power-off"></i>&nbsp;&nbsp;logout</a>
-						<!-- <div class="dropdown-menu">
-							<ul class="list-unstyled">
-								<li class="dropdown-menu-header bk-bg-white bk-margin-top-15">						
-									<div class="progress progress-xs  progress-striped active">
-										<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-											60%
-										</div>
-									</div>							
-								</li>	
-								
-							</ul>
-						</div> -->						
+						&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="updatePwd()" style="cursor:pointer;"><i class="fa fa-wrench"></i>&nbsp;&nbsp;password</a>
 					</div>
 					<!-- End Userbox -->
 				</div>
@@ -259,6 +172,44 @@
 		</div><!--/container-->
 		<div class="clearfix"></div>		
 		
+	<!-- 修改密码 -->
+	<div class="modal fade bs-example-modal-lg" id="updatePwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btnCancel">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    	 Update Password 
+                    </h4>
+                </div>
+                    <div class="modal-body">
+                        <div>
+                        	<div class="form-group">
+                        		 <label class="col-lg-3  control-label">Old PassWord：</label>
+	                            <div class="col-lg-9">
+	                            	<input type="password" name="oldPassWord" class="form-control"  id="oldPassWord" >
+	                            </div>
+	                            <label class="col-lg-3  control-label">New PassWord：</label>
+	                            <div class="col-lg-9 ">
+	                            	<input type="password" name="newPassWord" class="form-control"  id="newPassWord" >
+	                            </div>
+	                            <label class="col-lg-3  control-label">Again New PassWord：</label>
+	                            <div class="col-lg-9 ">
+	                            	<input type="password" name="againNewPassWord" class="form-control"  id="againNewPassWord" >
+	                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border-top:none;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">close</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="savePwd()">save</button>
+                    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+	</div>
+		
 		<!-- start: JavaScript-->
 		<!-- Vendor JS-->				
 		<script src="<%=basePath %>assets/vendor/js/jquery.min.js"></script>
@@ -313,6 +264,56 @@
 						dataType: "html",
 						async: false
 					});
+			}
+			
+			function updatePwd(){
+				$("#updatePwdModal").modal('show');
+			}
+			
+			function savePwd(){
+				var oldPassWord=$("#oldPassWord").val();
+				var newPassWord=$("#newPassWord").val();
+				var againNewPassWord=$("#againNewPassWord").val();
+				if(oldPassWord==null || oldPassWord==''){
+					toastr.warning("Old PassWord is Empty!");
+					return ;
+				}
+				if(newPassWord==null || newPassWord==''){
+					toastr.warning("New PassWord is Empty!");
+					return ;
+				}
+				if(againNewPassWord==null || againNewPassWord==''){
+					toastr.warning("Again New PassWord is Empty!");
+					return ;
+				}
+				if(newPassWord!=againNewPassWord){
+					toastr.warning(" New PassWord is not equal againNewPassWord!");
+					return ;
+				}
+				$.ajax({
+					url:'<%=basePath%>bsLogin/updatePwd',
+					type:'post',
+					data:{
+						oldPassWord:oldPassWord,
+						newPassWord:newPassWord,
+						againNewPassWord:againNewPassWord
+					},
+					success:function(msg){
+						if(msg == '0'){
+							toastr.success('update password success!');
+							$("#updatePwdModal").modal('hide');
+							setTimeout(function () {
+			    				window.location.href='<%=basePath%>/login.jsp';
+			  				}, 1500);
+										
+						}else{
+							toastr.error('update password error!');
+						}
+					},
+					error:function(err){
+					
+					}
+				});
 			}
 	</script>
 		<script src="<%=basePath %>assets/vendor/bootstrap/js/bootstrap.min.js"></script>

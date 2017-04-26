@@ -1,5 +1,6 @@
 package com.tonyj.myweb.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,5 +74,38 @@ public class BsLoginController extends BaseController {
 	@RequestMapping(value="/index")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		return new ModelAndView("index");
+	}
+	
+	@RequestMapping(value="/updatePwd")
+	public ModelAndView updatePwd(HttpServletRequest request, HttpServletResponse response,ModelMap model){
+		//从session中获取userid
+		BsUser bsUser = null;
+		if(request.getSession().getAttribute("bsUser") == null){
+			String contextPath = request.getContextPath();
+			try {
+				response.sendRedirect(contextPath+"/login.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			bsUser = (BsUser) request.getSession().getAttribute("bsUser");
+		}
+		Map paramMap = new HashMap();
+		paramMap.put("newPassWord", request.getParameter("newPassWord"));
+		paramMap.put("oldPassWord", request.getParameter("oldPassWord"));
+		paramMap.put("id", bsUser.getId());
+		try {
+			bsUserService.updatePwd(paramMap);
+			MessageStreamResult.msgStreamResult(response, "0");
+			request.getSession().setAttribute("bsUser", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				MessageStreamResult.msgStreamResult(response, "1");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

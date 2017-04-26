@@ -1,6 +1,9 @@
 package com.tonyj.myweb.controller.product.activity;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tonyj.frame.plugin.Page;
+import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.po.BsUser;
@@ -49,7 +53,8 @@ public class SUserActivityController extends BaseController {
 	}
 	
 	@RequestMapping(value="/mbUserActivityData")
-	public ModelAndView mbUserActivityData(HttpServletRequest request, HttpServletResponse response,SUserActivity activity,Page page,ModelMap model){
+	public ModelAndView mbUserActivityData(HttpServletRequest request, HttpServletResponse response,SUserActivity activity,ModelMap model){
+		List<SUserActivity> activityList = null;
 		try {
 			//从session中获取userid
 			BsUser bsUser = null;
@@ -65,16 +70,32 @@ public class SUserActivityController extends BaseController {
 			}
 			int userId = bsUser.getId();
 			activity.setUserid(userId);
-			page = sUserActivityService.selectPage(activity,page);
+			activityList = sUserActivityService.selectAll(activity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	model.put("page", page);
+    	model.put("activityList", activityList);
 		return new ModelAndView(Constant.PAGE_MB_USER_ACTIVITY_PATH+"userActivityData",model);
 	}
 	
 	@RequestMapping(value="/updateComete")
-	public ModelAndView updateComete(HttpServletRequest request, HttpServletResponse response,SUserActivity activity,Page page,ModelMap model){
+	public ModelAndView updateComete(HttpServletRequest request, HttpServletResponse response,ModelMap model){
+		String compete = request.getParameter("value");
+		String id = request.getParameter("pk");
+		Map paramMap = new HashMap();
+		paramMap.put("id", id);
+		paramMap.put("compete", compete);
+		try {
+			sUserActivityService.updateCompete(paramMap);
+			MessageStreamResult.msgStreamResult(response, "0");
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				MessageStreamResult.msgStreamResult(response, "1");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
 		return null;
 	}
 }

@@ -35,20 +35,36 @@
 								</div>
 							</div>
 						</div>
-						<div class="bs-example">
-							<div id="carousel-example-generic3" class="carousel bk-carousel-fade slide" data-ride="carousel">
-								LoginName : ${bsUser.loginName}<br/>
-								PassWord  : ${bsUser.passWord}<br/>
-								Age:${bsUser.age }<br/>
-								Sex:<c:if test="${bsUser.sex==1 }">
+						<div class="bk-ltr bk-padding-bottom-20 bk-padding-left-20">
+						<div class="row">
+							<div
+								class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
+								<i class="fa fa-user"></i> LoginName : ${bsUser.loginName}
+							</div>
+							<div
+								class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
+						<i class="fa fa-book"></i> PassWord  : ${bsUser.passWord}
+							</div>
+							<div
+								class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
+								<i class="fa fa-star"></i> Age:${bsUser.age }
+							</div>
+							<div
+								class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
+								<i class="fa fa-flag"></i> Sex:<c:if test="${bsUser.sex==1 }">
 										Male
 									</c:if>
 									<c:if test="${bsUser.sex==2 }">
 										Female
-									</c:if><br/>
-								CreateTime:<fmt:formatDate value="${bsUser.created }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</c:if>
 							</div>
+							<div
+								class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
+								<i class="fa fa-times-circle-o"></i> CreateTime:<fmt:formatDate value="${bsUser.created }" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</div>
+							
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -87,7 +103,7 @@
 				</div>
 				<div
 					class="col-12-4 col-md-12 col-sm-12 col-xs-12 bk-bg-white bk-padding-top-10">
-					<i class="fa fa-tablet"></i> ${bsUser.email }
+					<i class="fa fa-envelope"></i> ${bsUser.email }
 				</div>
 			</div>
 		</div>

@@ -53,6 +53,23 @@
     order by created desc
   </select>
   
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.tonyj.myweb.po.product.activity.SUserActivity">
+  	 select 
+    <include refid="Base_Column_List" />
+    from s_user_activity
+    where 1=1
+    <if test="activityname != null and activityname!='' ">  
+        	and activityname LIKE concat(concat('%',#{activityname}),'%')
+    </if>
+    <if test="username != null and username!='' ">  
+        	and username LIKE concat(concat('%',#{username}),'%')
+    </if>
+    <if test="userid != null ">  
+        	and userid=#{userid}
+    </if>
+    order by created desc
+  </select>
+  
   <delete id="delete" parameterType="java.lang.Integer" >
     delete from s_user_activity
     where id = #{id,jdbcType=INTEGER}
@@ -81,6 +98,12 @@
       status = #{status,jdbcType=INTEGER},
       updated = sysDate()
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateCompete" parameterType="java.util.Map">
+  	update s_user_activity
+  	set compete=#{compete}
+  	where id = #{id}
   </update>
   
 </mapper>

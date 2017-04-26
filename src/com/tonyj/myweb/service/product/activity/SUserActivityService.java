@@ -1,5 +1,6 @@
 package com.tonyj.myweb.service.product.activity;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,19 @@ public class SUserActivityService {
 		return sUserActivityDao.selectPage(activity,page);
 	}
 	
+	public List<SUserActivity> selectAll(SUserActivity activity)throws Exception{
+		return sUserActivityDao.selectAll(activity);
+	}
+	
 	public SUserActivity mbIsExits(Map parmMap)throws Exception{
 		return sUserActivityDao.mbIsExits(parmMap);
 	}
 	
 	public void saveSUserActivity(SUserActivity activity)throws Exception{
 		sUserActivityDao.saveSUserActivity(activity);
+	}
+	
+	public void updateCompete(Map parmMap)throws Exception{
+		sUserActivityDao.updateCompete(parmMap);
 	}
 }

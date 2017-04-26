@@ -34,20 +34,16 @@
 
 <script type="text/javascript">
 	search();
-	function search(pageid){
-		if(pageid==undefined){
-			pageid=1;
-		}
+	function search(){
 		$.ajax({
 			url:'<%=basePath%>sUserActivity/mbUserActivityData',
 			data:{
 				activityname:$("#activityName").val(),
-				page:pageid
 			},
 			type:'post',
 			success:function(msg){
 				$("#dataDiv").html(msg);
-				$("#activityUserTable").bootstrapTable({
+				/* $("#activityUserTable").bootstrapTable({
 					totalRows:$("#pageTotal").val(),
 					pagination : true, //启动分页  
 					pageSize : 10, //每页显示的记录数  
@@ -58,7 +54,7 @@
 					onPageChange : function(number,size){
 						search(number);
 					}
-				});
+				}); */
 			},
 			error:function(err){
 			

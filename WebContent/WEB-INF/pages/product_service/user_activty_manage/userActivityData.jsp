@@ -28,9 +28,24 @@
 								<td>
 									<div class="bar">
 										<div class="progress progress-md  progress-striped active">
-											<div class="progress-bar progress-bar-success" role="progressbar" 
-											aria-valuenow="${userActivity.compete }" aria-valuemin="0" aria-valuemax="100" 
-											style="width: ${userActivity.compete }%"></div>
+											<div 
+												<c:if test="${userActivity.compete <=50 && userActivity.compete > 25 }">
+													class="progress-bar progress-bar-warning"
+												</c:if>
+												<c:if test="${userActivity.compete >= 50 && userActivity.compete< 75}">
+													class="progress-bar progress-bar-primary"
+												</c:if>
+												<c:if test="${userActivity.compete >= 75}">
+													class="progress-bar progress-bar-success"
+												</c:if>
+												<c:if test="${userActivity.compete < 25 }">
+													class="progress-bar progress-bar-danger" 
+												</c:if>
+												role="progressbar"  aria-valuenow="${userActivity.compete }" 
+												aria-valuemin="0" 
+												aria-valuemax="100" 
+												style="width: ${userActivity.compete }%">
+											</div>
 										</div>
 									</div>			
 									<div class="desc">${userActivity.compete } of 100</div>

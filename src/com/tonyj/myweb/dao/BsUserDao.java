@@ -35,4 +35,8 @@ public class BsUserDao extends MyBatisDao<BsUser> {
 	public BsUser getUserById(Integer id)throws Exception{
 		return this.selectSingle(id);
 	}
+	
+	public void updatePwd(Map map)throws Exception{
+		this.getSqlSession().update("updatePassWord", map);
+	}
 }

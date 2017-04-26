@@ -94,4 +94,10 @@
 		from bs_user
 		where loginName=#{loginName} and passWord=#{passWord} 
 	</select>
+	
+	<update id="updatePassWord" parameterType="java.util.HashMap">
+		update bs_user
+		set passWord=#{newPassWord}
+		where id = #{id} and passWord=#{oldPassWord}
+	</update>
 </mapper>
