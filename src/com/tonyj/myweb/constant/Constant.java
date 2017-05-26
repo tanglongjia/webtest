@@ -2,6 +2,7 @@ package com.tonyj.myweb.constant;
 
 public class Constant {
 
+	//==========================================基础框架 start===================================
 	/**
 	 * 用户管理
 	 */
@@ -22,6 +23,20 @@ public class Constant {
 	 */
 	public static final String PAGE_RES_PATH="pages/sys_manage/resource_manage/";
 	
+	/**
+	 * 权限管理
+	 */
+	public static final String PAGE_AUT_PATH="pages/sys_manage/authority_manage/";
+	
+	
+	/**
+	 * 日志管理
+	 */
+	public static final String PAGE_LOG_PATH="pages/sys_manage/log_manage/";
+	//==========================================基础框架 end===================================
+	
+	
+	//==========================================业务页面 start===================================
 	
 	/**
 	 * 活动管理
@@ -42,4 +57,7 @@ public class Constant {
 	 * 用户活动管理
 	 */
 	public static final String PAGE_MB_USER_ACTIVITY_PATH="pages/product_service/mb_user_activty_manage/";
+	
+	
+	//==========================================业务页面 end===================================
 }

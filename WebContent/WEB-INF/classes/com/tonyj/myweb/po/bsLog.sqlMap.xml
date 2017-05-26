@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tonyj.myweb.po.BsLog" >
+	<insert id="insert" parameterType="com.tonyj.myweb.po.BsLog">
+		insert into bs_log(description,method,logType,requestIp,excepCode,excepDetail,params,operatorId,operatorName,createDate)
+		values(#{description},#{method},#{logType},#{requestIp},#{excepCode},#{excepDetail},#{params},#{operatorId},#{operatorName},sysDate())
+	</insert>
+	
+	<select id="selectPage" parameterType="com.tonyj.myweb.po.BsLog" resultType="com.tonyj.myweb.po.BsLog">
+		select id,description,method,logType,requestIp,excepCode,excepDetail,params,operatorId,operatorName,createDate
+		from bs_log
+		where 1 = 1 and logType=#{logType} 
+		<if test="description !=null and description!=''">
+			and description like concat(concat('%',#{description}),'%')
+		</if>
+		<if test="operatorName !=null and operatorName!=''">
+			and operatorName like concat(concat('%',#{operatorName}),'%')
+		</if>
+			and date(createDate) between  #{beginTime} and #{endTime}
+	</select>	
+</mapper>

@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
+import com.tonyj.myweb.annotation.SystemLogAfterController;
+import com.tonyj.myweb.annotation.SystemLogBeforeController;
 import com.tonyj.myweb.po.BsUser;
 import com.tonyj.myweb.service.BsUserService;
 
@@ -28,6 +30,7 @@ public class BsLoginController extends BaseController {
 	private BsUserService bsUserService;
 	
 	@RequestMapping(value="/doLogin",method = RequestMethod.POST)
+	@SystemLogAfterController(description = "用户登录系统")  
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map paramMap = new HashMap();
 		paramMap.put("loginName", request.getParameter("username"));
@@ -66,6 +69,7 @@ public class BsLoginController extends BaseController {
 	}
 	
 	@RequestMapping(value="/logout")
+	@SystemLogBeforeController(description = "用户注销系统")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		request.getSession().setAttribute("bsUser", null);
 		return new ModelAndView("redirect:/login.jsp");
@@ -77,6 +81,7 @@ public class BsLoginController extends BaseController {
 	}
 	
 	@RequestMapping(value="/updatePwd")
+	@SystemLogBeforeController(description = "用户更新登录密码")
 	public ModelAndView updatePwd(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		//从session中获取userid
 		BsUser bsUser = null;

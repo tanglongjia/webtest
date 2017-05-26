@@ -8,7 +8,7 @@
 	<head>
 		<!-- Basic -->
     	<meta charset="UTF-8" />
-		<title>Dashboard | Nadhif - Responsive Admin Template</title>
+		<title>基础框架系统</title>
 		<!-- Mobile Metas -->
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<!-- Favicon and touch icons -->
@@ -64,7 +64,6 @@
 		<link href="<%=basePath %>assets/plugins/bootstrap-datepicker/css/datepicker-theme.css" rel="stylesheet" />
 		<!-- end: CSS file-->	
 		<!-- Head Libs -->
-		<script src="<%=basePath %>assets/plugins/modernizr/js/modernizr.js"></script>
 	</head>
 	
 	<body>
@@ -87,11 +86,11 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-user"></i>
 							<div class="profile-info">
-								<span class="name">Welcome ${ sessionScope.bsUser.trueName}</span>
+								<span class="name">欢迎您！ ${ sessionScope.bsUser.trueName}</span>
 							</div>			
 						</a>
-						<a onclick="logout()" style="cursor:pointer;"><i class="fa fa-power-off"></i>&nbsp;&nbsp;logout</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="updatePwd()" style="cursor:pointer;"><i class="fa fa-wrench"></i>&nbsp;&nbsp;password</a>
+						<a onclick="logout()" style="cursor:pointer;"><i class="fa fa-power-off"></i>&nbsp;&nbsp;注销</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="updatePwd()" style="cursor:pointer;"><i class="fa fa-wrench"></i>&nbsp;&nbsp;更改密码</a>
 					</div>
 					<!-- End Userbox -->
 				</div>
@@ -110,7 +109,7 @@
 						<!-- Sidebar Header Logo-->
 						<div class="sidebar-header">
 							<!--  <img src="assets/img/logo.png" class="img-responsive" alt="" />-->
-							<span style="font-weight: bold;font-size: 24px">Scouts System</span>
+							<span style="font-weight: bold;font-size: 24px">基础框架系统</span>
 						</div>
 						<!-- Sidebar Menu-->
 						<div class="sidebar-menu">						
@@ -133,13 +132,12 @@
 					<!-- Sidebar Footer-->
 					<div class="sidebar-footer">	
 						<ul class="sidebar-terms">
-							<li><a href="#">Team</a></li>
-							<li><a href="#">Person</a></li>
-							<li><a href="#">Help</a></li>
-							<li><a href="#">About</a></li>
+							<li><a href="#">团队</a></li>
+							<li><a href="#">个人</a></li>
+							<li><a href="#">帮助</a></li>
+							<li><a href="#">关于</a></li>
 						</ul>
 						<div class="copyright text-center">
-							<small>TonyJ <i class="fa fa-coffee"></i> Copyright &copy; 2017 56HeplWorkSpace</small>
 						</div>					
 					</div>
 					<!-- End Sidebar Footer-->
@@ -187,15 +185,15 @@
                     <div class="modal-body">
                         <div>
                         	<div class="form-group">
-                        		 <label class="col-lg-3  control-label">Old PassWord：</label>
+                        		 <label class="col-lg-3  control-label">旧密码：</label>
 	                            <div class="col-lg-9">
 	                            	<input type="password" name="oldPassWord" class="form-control"  id="oldPassWord" >
 	                            </div>
-	                            <label class="col-lg-3  control-label">New PassWord：</label>
+	                            <label class="col-lg-3  control-label">新密码：</label>
 	                            <div class="col-lg-9 ">
 	                            	<input type="password" name="newPassWord" class="form-control"  id="newPassWord" >
 	                            </div>
-	                            <label class="col-lg-3  control-label">Again New PassWord：</label>
+	                            <label class="col-lg-3  control-label">再次新密码：</label>
 	                            <div class="col-lg-9 ">
 	                            	<input type="password" name="againNewPassWord" class="form-control"  id="againNewPassWord" >
 	                            </div>
@@ -203,8 +201,8 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="border-top:none;">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">close</button>
-                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="savePwd()">save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="savePwd()">保存</button>
                     </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -212,9 +210,11 @@
 		
 		<!-- start: JavaScript-->
 		<!-- Vendor JS-->				
-		<script src="<%=basePath %>assets/vendor/js/jquery.min.js"></script>
 		<script src="<%=basePath %>assets/vendor/js/jquery-2.1.1.min.js"></script>
-		<script src="<%=basePath %>assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="<%=basePath %>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!-- Theme JS -->		
+		<script src="<%=basePath %>assets/js/jquery.mmenu.min.js"></script>
+		<script src="<%=basePath %>assets/js/core.min.js"></script>
 		<script type="text/javascript">
 			getLeftMenu();
 		    function getLeftMenu(){
@@ -275,19 +275,19 @@
 				var newPassWord=$("#newPassWord").val();
 				var againNewPassWord=$("#againNewPassWord").val();
 				if(oldPassWord==null || oldPassWord==''){
-					toastr.warning("Old PassWord is Empty!");
+					toastr.warning("旧密码为空!");
 					return ;
 				}
 				if(newPassWord==null || newPassWord==''){
-					toastr.warning("New PassWord is Empty!");
+					toastr.warning("新密码为空!");
 					return ;
 				}
 				if(againNewPassWord==null || againNewPassWord==''){
-					toastr.warning("Again New PassWord is Empty!");
+					toastr.warning("第二次密码不能为空!");
 					return ;
 				}
 				if(newPassWord!=againNewPassWord){
-					toastr.warning(" New PassWord is not equal againNewPassWord!");
+					toastr.warning("新密码两次不一样!");
 					return ;
 				}
 				$.ajax({
@@ -315,38 +315,11 @@
 					}
 				});
 			}
-	</script>
-		<script src="<%=basePath %>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="<%=basePath %>assets/vendor/skycons/js/skycons.js"></script>		
-		<!-- Plugins JS-->		
-		<script src="<%=basePath %>assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/bootkit/js/bootkit.js"></script>
-		<script src="<%=basePath %>assets/plugins/moment/js/moment.min.js"></script>	
-		<script src="<%=basePath %>assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/touchpunch/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/flot/js/jquery.flot.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/flot/js/jquery.flot.pie.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/flot/js/jquery.flot.resize.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/flot/js/jquery.flot.stack.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/flot/js/jquery.flot.time.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/xcharts/js/xcharts.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/autosize/jquery.autosize.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/placeholder/js/jquery.placeholder.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/raphael/js/raphael.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/morris/js/morris.min.js"></script>
-		<script src="<%=basePath %>assets/plugins/gauge/js/gauge.min.js"></script>		
-		<script src="<%=basePath %>assets/plugins/d3/js/d3.min.js"></script>	
+		</script>
 		<!-- bootstrap table -->
 		<script src="<%=basePath %>assets/plugins/bootstrap-table/bootstrap-table.js"></script>	
-		<%-- <script src="<%=basePath %>assets/plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>	 --%>	
-		<!-- Theme JS -->		
-		<script src="<%=basePath %>assets/js/jquery.mmenu.min.js"></script>
-		<script src="<%=basePath %>assets/js/core.min.js"></script>
+		<script src="<%=basePath %>assets/plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>	
 		<!-- Pages JS -->
-		<script src="<%=basePath %>assets/js/pages/index.js"></script>
 		<!-- toastr -->
 		<script src="<%=basePath %>assets/plugins/toastr/toastr.js"></script>
 		<!-- bootstrap-editable -->

@@ -2,6 +2,7 @@ package com.tonyj.myweb.constant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TreeBean {
 
@@ -10,6 +11,10 @@ public class TreeBean {
 	private Integer parentId;
 	
 	private String text;
+	
+	private Map state;
+	
+	private String selected;
 	
 	private List<TreeBean> children=new ArrayList<TreeBean>();
 
@@ -44,6 +49,21 @@ public class TreeBean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
+	public Map getState() {
+		return state;
+	}
+
+	public void setState(Map state) {
+		this.state = state;
+	}
+
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
+	}
 	
 }

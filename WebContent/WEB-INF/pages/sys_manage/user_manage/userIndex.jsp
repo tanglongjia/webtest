@@ -9,28 +9,28 @@
 		<div class="panel">
 			<div class="panel-heading bk-bg-primary">
 				<h6>
-					<i class="fa fa-indent red"></i>User Manage
+					<i class="fa fa-indent red"></i>用户管理
 				</h6>
 			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form">
-					<label class="col-sm-1 control-label" for="input-small">UserName：</label>
+					<label class="col-sm-1 control-label" for="input-small">用户名：</label>
 					<div class="col-sm-3">
 						<input type="text" id="username" name="username"
-							class="form-control input-sm" placeholder="UserName" />
+							class="form-control input-sm" placeholder="用户名" />
 					</div>
-					<label class="col-sm-1 control-label" for="input-small">Telephone：</label>
+					<label class="col-sm-1 control-label" for="input-small">手机号：</label>
 					<div class="col-sm-3">
 						<input type="text" id="telephone" name="telephone"
-							class="form-control input-sm" placeholder="Telephone" />
+							class="form-control input-sm" placeholder="手机号" />
 					</div>
 					<div class="col-sm-4" style="text-align: right">
-						<button type="button" class="btn btn-success" onclick="search()">search</button>
+						<button type="button" class="btn btn-success" onclick="search()">查询</button>
 						<button id="btn_add" type="button" class="btn btn-success"  data-toggle="modal" data-target="#userModal">
-                			<span aria-hidden="true"></span>add
+                			<span aria-hidden="true"></span>新增
             			</button>
-            			<button type="button" class="btn btn-success" onclick="update()">update</button>
-						<button type="button" class="btn btn-success" onclick="deleteUser()">delete</button>
+            			<button type="button" class="btn btn-success" onclick="update()">更新</button>
+						<button type="button" class="btn btn-success" onclick="deleteUser()">删除</button>
 					</div>
 				</form>
 			</div>
@@ -51,75 +51,75 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                    	 Add User Info
+                    	 增加用户
                     </h4>
                 </div>
                     <div class="modal-body">
                         <div>
                         	<div class="form-group">
-	                            <label class="col-lg-2  control-label">TrueName：</label>
+	                            <label class="col-lg-2  control-label">真实姓名：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addTrueName" class="form-control"  id="addTrueName" >
 	                            </div>
-	                            <label class="col-lg-2  control-label">Telephone：</label>
+	                            <label class="col-lg-2  control-label">手机号码：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addTelephone" class="form-control"  id="addTelephone" >
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">Email：</label>
+	                            <label class="col-lg-2  control-label">邮件：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addEmail" class="form-control"  id="addEmail" >
 	                            </div>
-	                            <label class="col-lg-2  control-label">Address：</label>
+	                            <label class="col-lg-2  control-label">地址：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addAddress" class="form-control"  id="addAddress" >
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">Age：</label>
+	                            <label class="col-lg-2  control-label">年龄：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addAge" class="form-control"  id="addAge" >
 	                            </div>
-                             	<label class="col-lg-2  control-label">Sex：</label>
+                             	<label class="col-lg-2  control-label">性别：</label>
 	                            <div class="col-lg-4 ">
 	                            	 <select  class="form-control" id="addSex" name="addSex">
-	                                     <option value="1">Male</option>
-	                                     <option value="2">Female</option>
+	                                     <option value="1">男</option>
+	                                     <option value="2">女</option>
 	                                 </select>
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">LoginName：</label>
+	                            <label class="col-lg-2  control-label">登录用户名：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="addLoginName" class="form-control"  id="addLoginName" >
 	                            </div>
-                             	<label class="col-lg-2  control-label">PassWord：</label>
+                             	<label class="col-lg-2  control-label">登录密码：</label>
 	                            <div class="col-lg-4 ">
 	                            	 <input type="text" name="addPassWord" class="form-control"  id="addPassWord" >
 	                            </div>
                             </div>
                              <div class="form-group">
-	                            <label class="col-lg-2  control-label">UserType：</label>
+	                            <label class="col-lg-2  control-label">用户类型：</label>
 	                            <div class="col-lg-4 ">
 	                            	<select  class="form-control" id="addUserType" name="addUserType">
-	                                     <option value="0">leader</option>
-	                                     <option value="1">member</option>
+	                                     <option value="0">管理员</option>
+	                                     <option value="1">成员</option>
 	                                 </select>
 	                            </div>
-                             	<label class="col-lg-2  control-label">Accout Status：</label>
+                             	<label class="col-lg-2  control-label">帐号状态：</label>
 	                            <div class="col-lg-4 ">
 	                            	<select  class="form-control" id="addStatus" name="addStatus">
-	                                     <option value="1">Enable</option>
-	                                     <option value="0">Disable</option>
+	                                     <option value="1">有效</option>
+	                                     <option value="0">无效</option>
 	                                 </select>
 	                            </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="border-top:none;">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">close</button>
-                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="saveUser()">save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="saveUser()">保存</button>
                     </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -134,76 +134,76 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                    	 Update User Info
+                    	 更新用户信息
                     </h4>
                 </div>
                     <div class="modal-body">
                         <div>
                         	<div class="form-group">
                         		<input type="hidden" id="updateUserId" />
-	                            <label class="col-lg-2  control-label">TrueName：</label>
+	                            <label class="col-lg-2  control-label">真实姓名：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateTrueName" class="form-control"  id="updateTrueName" >
 	                            </div>
-	                            <label class="col-lg-2  control-label">Telephone：</label>
+	                            <label class="col-lg-2  control-label">手机号码：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateTelephone" class="form-control"  id="updateTelephone" >
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">Email：</label>
+	                            <label class="col-lg-2  control-label">邮箱：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateEmail" class="form-control"  id="updateEmail" >
 	                            </div>
-	                            <label class="col-lg-2  control-label">Address：</label>
+	                            <label class="col-lg-2  control-label">地址：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateAddress" class="form-control"  id="updateAddress" >
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">Age：</label>
+	                            <label class="col-lg-2  control-label">年龄：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateAge" class="form-control"  id="updateAge" >
 	                            </div>
-                             	<label class="col-lg-2  control-label">Sex：</label>
+                             	<label class="col-lg-2  control-label">性别：</label>
 	                            <div class="col-lg-4 ">
 	                            	 <select  class="form-control" id="updateSex" name="updateSex">
-	                                     <option value="1">Male</option>
-	                                     <option value="2">Female</option>
+	                                     <option value="1">男</option>
+	                                     <option value="2">女</option>
 	                                 </select>
 	                            </div>
                             </div>
                             <div class="form-group">
-	                            <label class="col-lg-2  control-label">LoginName：</label>
+	                            <label class="col-lg-2  control-label">登录用户名：</label>
 	                            <div class="col-lg-4 ">
 	                            	<input type="text" name="updateLoginName" class="form-control"  id="updateLoginName" >
 	                            </div>
-                             	<label class="col-lg-2  control-label">PassWord：</label>
+                             	<label class="col-lg-2  control-label">登录密码：</label>
 	                            <div class="col-lg-4 ">
 	                            	 <input type="text" name="updatePassWord" class="form-control"  id="updatePassWord" >
 	                            </div>
                             </div>
                              <div class="form-group">
-	                            <label class="col-lg-2  control-label">UserType：</label>
+	                            <label class="col-lg-2  control-label">用户类型：</label>
 	                            <div class="col-lg-4 ">
 	                            	<select  class="form-control" id="updateUserType" name="updateUserType">
-	                                     <option value="0">leader</option>
-	                                     <option value="1">member</option>
+	                                     <option value="0">管理员</option>
+	                                     <option value="1">成员</option>
 	                                 </select>
 	                            </div>
-                             	<label class="col-lg-2  control-label">Accout Status：</label>
+                             	<label class="col-lg-2  control-label">帐号状态：</label>
 	                            <div class="col-lg-4 ">
 	                            	<select  class="form-control" id="updateStatus" name="updateStatus">
-	                                     <option value="1">Enable</option>
-	                                     <option value="0">Disable</option>
+	                                     <option value="1">有效</option>
+	                                     <option value="0">无效</option>
 	                                 </select>
 	                            </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="border-top:none;">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">close</button>
-                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="saveUpdateUser()">update</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="saveUpdateUser()">更新</button>
                     </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -252,7 +252,7 @@
 		//判断真实姓名
 		var trueName = $("#addTrueName").val();
 		if(trueName==null || trueName == ''){
-			toastr.info('trueName is empty!');
+			toastr.info('真实姓名不能为空!');
 			return ;
 		}
 		//判断手机号码
@@ -260,25 +260,25 @@
 		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
 		if(!myreg.test(telephone)) 
 		{ 
-			toastr.info('telephone number format error !');
+			toastr.info('手机号码格式不正确!');
 		    return ; 
-		}
+		} 
 		//判断年龄 
 		var age = $("#addAge").val();
 		if(age ==null || age == '' || age < 0 || age > 120 || isNaN(age)==true){
-			toastr.info('the ages between 0 to 120 and num ! ');
+			toastr.info('年龄须在0到120之间! ');
 			return ;
 		}
 		//判断登录用户名
 		var loginName = $("#addLoginName").val();
 		if(loginName==null || loginName == ''){
-			toastr.info('loginName is empty!');
+			toastr.info('登录用户名不能为空!');
 			return ;
 		}
 		//判断登录密码
 		var passWord = $("#addPassWord").val();
 		if(passWord==null || passWord == ''){
-			toastr.info('passWord is empty!');
+			toastr.info('登录密码不能为空!');
 			return ;
 		}
 		//判断邮箱
@@ -286,7 +286,7 @@
 		//判断地址
 		var address = $("#addAddress").val();
 		if(address==null || address == ''){
-			toastr.info('address is empty!');
+			toastr.info('地址不能为空!');
 			return ;
 		}
 		$.ajax({
@@ -306,7 +306,7 @@
 			},
 			success:function(msg){
 				$("#userModal").modal('hide');
-				toastr.info('save user info success！');
+				toastr.info('保存用户成功！');
 				search();
 			},
 			error:function(err){
@@ -319,7 +319,7 @@
 	function update(){
 		var userId = $("#userId").val();
 		if(userId == null || userId == ''){
-			toastr.info('please select one record to update！');
+			toastr.info('请选择一条记录进行更新！');
 			return ;
 		}
 		$.ajax({
@@ -355,40 +355,41 @@
 		//判断真实姓名
 		var trueName = $("#updateTrueName").val();
 		if(trueName==null || trueName == ''){
-			toastr.info('trueName is empty!');
+			toastr.info('真实姓名不能为空!');
 			return ;
 		}
 		//判断手机号码
 		var telephone = $("#updateTelephone").val();
-		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+	    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
 		if(!myreg.test(telephone)) 
 		{ 
-			toastr.info('telephone number format error !');
+			toastr.info('手机号码格式不对 !');
 		    return ; 
 		}
 		//判断年龄 
 		var age = $("#updateAge").val();
 		if(age ==null || age == '' || age < 0 || age > 120 || isNaN(age)==true){
-			toastr.info('the ages between 0 to 120 and num ! ');
+			toastr.info('年龄必须在0到120之间 ! ');
 			return ;
 		}
 		//判断登录用户名
 		var loginName = $("#updateLoginName").val();
 		if(loginName==null || loginName == ''){
-			toastr.info('loginName is empty!');
+			toastr.info('登录用户名不能为空!');
 			return ;
 		}
 		//判断登录密码
 		var passWord = $("#updatePassWord").val();
 		if(passWord==null || passWord == ''){
-			toastr.info('passWord is empty!');
+			toastr.info('密码不能为空!');
 			return ;
 		}
 		//判断邮箱
 		var email = $("#updateEmail").val();
 		//判断地址
+		var address = $("#updateAddress").val();
 		if(address==null || address == ''){
-			toastr.info('address is empty!');
+			toastr.info('地址不能为空!');
 			return ;
 		}
 		$.ajax({
@@ -410,10 +411,10 @@
 			success:function(msg){
 				if(msg == '0'){
 					$("#userUpdateModal").modal('hide');
-					toastr.info("update user info success！");
+					toastr.info("更新用户信息成功！");
 					search();
 				}else{
-					toastr.info("update user info failure！");
+					toastr.info("更新用户信息失败！");
 				}
 				
 			},
@@ -427,7 +428,7 @@
 	function deleteUser(){
 		var userId = $("#userId").val();
 		if(userId == null || userId == ''){
-			toastr.info('please select one record to delete !');
+			toastr.info('请选择一条记录进行删除!');
 			return ;
 		}
 		$.confirm({
@@ -443,10 +444,10 @@
 		        		},
 		        		success:function(msg){
 		        			if(msg == "0"){
-		        				toastr.info("delete user success!")
+		        				toastr.info("删除用户成功!");
 		        				search();
 		        			}else{
-		        				toastr.info("delete user failure!")
+		        				toastr.info("删除用户失败!");
 		        			}
 		        		},
 		        		error:function(err){

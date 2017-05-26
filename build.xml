@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>   
 <project name="bootstrap" default="deploy" basedir=".">
 	<!--定义打包编译的路径-->
-	<property name="webapp.name"  value="webtest" description="打出的war包名称"/>   
+	<property name="webapp.name"  value="scouts" description="打出的war包名称"/>   
     <property name="build.dir"  value="build" description="输出目录"/>
 	<property name="build.war.dir"  value="${build.dir}/war" description="war包的输出目录"/>
     <property name="build.web.dir"  value="${build.dir}/WEB-INF" description="web配置输出目录"/>
@@ -41,7 +41,7 @@
     <!--3.编译源文件-->
     <target name="compile" depends="init,clean" description="Compile Java sources" >   
     	<!--编译java文件成class文件到指定目录-->
-    	<javac srcdir="${src.dir}"  destdir="${build.web.class.dir}" optimize="true">   
+    	<javac srcdir="${src.dir}"  destdir="${build.web.class.dir}" optimize="false">   
     		<compilerarg line="-encoding utf-8"/>
             <classpath refid="project.classpath"/>   
         </javac>   
@@ -62,6 +62,6 @@
        <war destfile="${build.war.dir}/${webapp.name}-${createdate}-${version}.war" basedir="${build.dir}" webxml="${build.dir}/WEB-INF/web.xml">     
             <lib dir="${build.web.lib.dir}"/>    
             <classes dir="${build.web.class.dir}"/>            
-        </war>    
+       </war>
     </target> 
 </project>   

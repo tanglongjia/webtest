@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.tonyj.frame.plugin.Page;
 import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
+import com.tonyj.myweb.annotation.SystemLogBeforeController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.constant.TreeBean;
 import com.tonyj.myweb.po.BsResource;
@@ -41,27 +42,29 @@ public class BsResourceController extends BaseController {
 	 */
 	@RequestMapping(value="/getLeftMenu", method=RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
+    @SystemLogBeforeController(description = "生成左侧菜单树")
     public String getLeftMenu(HttpServletRequest request, HttpServletResponse response){
+		//从session中获取userid
+		BsUser bsUser = null;
+		if(request.getSession().getAttribute("bsUser") == null){
+			String contextPath = request.getContextPath();
+			try {
+				response.sendRedirect(contextPath+"/login.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			bsUser = (BsUser) request.getSession().getAttribute("bsUser");
+		}
 		Map<String,Integer> paramMap= new HashMap<String,Integer>();
 		paramMap.put("parentId", 0);
+		paramMap.put("userId", bsUser.getId());
 		List<BsResource> bsResouceList = bsResourceService.getLeftMenu(paramMap);
 		if(!bsResouceList.isEmpty()){
-			//从session中获取userid
-			BsUser bsUser = null;
-			if(request.getSession().getAttribute("bsUser") == null){
-				String contextPath = request.getContextPath();
-				try {
-					response.sendRedirect(contextPath+"/login.jsp");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}else{
-				bsUser = (BsUser) request.getSession().getAttribute("bsUser");
-			}
 			for (BsResource bsResource : bsResouceList) {
 					Map<String,Integer> pMap = new HashMap<String,Integer>();
 					pMap.put("parentId", bsResource.getId());
-					pMap.put("userType", bsUser.getUserType());
+					pMap.put("userId", bsUser.getId());
 					List<BsResource> childList = bsResourceService.getLeftMenu(pMap);
 					bsResource.setChildList(childList);
 			}
@@ -76,6 +79,7 @@ public class BsResourceController extends BaseController {
 	}
 	
 	@RequestMapping(value="/getTree")
+	@SystemLogBeforeController(description = "生成菜单页面的左侧树")
 	public ModelAndView getTree(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map<String,Integer> paramMap= new HashMap<String,Integer>();
 		paramMap.put("parentId", 0);
@@ -93,6 +97,9 @@ public class BsResourceController extends BaseController {
 		tb.setId(0);
 		tb.setParentId(-1);
 		tb.setChildren(treeList);
+		Map state = new HashMap();
+		state.put("opened", true);
+		tb.setState(state);
 		tb.setText("全部");
 		String returnValue = JSONArray.toJSONString(tb);
 		try {
@@ -105,6 +112,7 @@ public class BsResourceController extends BaseController {
 	
 	
 	@RequestMapping(value = "/getData")
+	@SystemLogBeforeController(description = "生成菜单页面的右侧table资源列表")
 	public ModelAndView getData(HttpServletRequest request,
 			HttpServletResponse response, Page page, ModelMap model) {
 		BsResource bsResource = new BsResource();
@@ -125,6 +133,7 @@ public class BsResourceController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/getResByPk")
+	@SystemLogBeforeController(description = "根据菜单id查询菜单信息")
 	public ModelAndView getResByPk(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		String id = request.getParameter("id");
@@ -141,6 +150,7 @@ public class BsResourceController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/updateResByPk")
+	@SystemLogBeforeController(description = "根据菜单的id更新资源信息")
 	public ModelAndView updateResByPk(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		Map map = new HashMap();
@@ -154,6 +164,7 @@ public class BsResourceController extends BaseController {
 	}
 
 	@RequestMapping(value = "/saveAddRes")
+	@SystemLogBeforeController(description = "保存菜单信息")
 	public ModelAndView saveAddRes(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		//分装信息并保存

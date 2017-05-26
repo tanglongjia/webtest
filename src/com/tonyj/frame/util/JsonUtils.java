@@ -83,7 +83,7 @@ public class JsonUtils {
         }
     }
 
-    public static <T> T jsonToObject(String json, TypeReference<T> typeReference) {
+   /* public static <T> T jsonToObject(String json, TypeReference<T> typeReference) {
         if (StringUtils.isEmpty(json)) {
             return null;
         } else {
@@ -94,7 +94,7 @@ public class JsonUtils {
                 return null;
             }
         }
-    }
+    }*/
     
 	/**
 	 * Method to deserialize JSON content as tree expressed using set of

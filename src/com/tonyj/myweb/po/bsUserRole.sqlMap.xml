@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tonyj.myweb.po.BsUserRole">
+	<insert id="saveUserRole" useGeneratedKeys="true" parameterType="java.util.List">  
+	    insert into bs_user_role (userId,roleId,created,createdby)   
+	    values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.userId},#{item.roleId},sysDate(),#{item.createdby})  
+	    </foreach>  
+	</insert> 
+	
+	<insert id="saveRoleMenu" useGeneratedKeys="true" parameterType="java.util.List">  
+	    insert into bs_role_resource(resourceId,roleId,created,createdby)   
+	    values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.resourceId},#{item.roleId},sysDate(),#{item.createdby})  
+	    </foreach>  
+	</insert> 
+	
+	<delete id="deleteRoleMenu" parameterType="java.util.Map">
+		delete from bs_role_resource where roleId in (select roleId from bs_user_role where userId = #{userId} );
+	</delete>
+	
+	<delete id="deleteUserRole" parameterType="java.util.Map">
+		delete from bs_user_role where userId = #{userId}
+	</delete>
+	
+	
+	<select id="selectRole" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select roleId
+		from bs_user_role
+		where userId = #{userId}
+	</select>
+	
+	<select id="selectMenu" parameterType="java.util.Map" resultType="com.tonyj.myweb.constant.TreeBean">
+		SELECT
+			t1.id AS id,
+			t1.menuName AS text,
+			t1.parentId AS pid,
+			t4.selected
+		FROM
+			bs_resource t1
+		LEFT JOIN (
+			SELECT DISTINCT
+				t3.resourceId,
+				'selected' AS selected
+			FROM
+				bs_role_resource t3
+			WHERE t3.roleId = #{roleId}
+		) t4 ON t1.id = t4.resourceId
+		WHERE
+			t1.parentId = #{parentId}
+	</select>
+	
+</mapper>

@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.tonyj.frame.plugin.Page;
 import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
+import com.tonyj.myweb.annotation.SystemLogBeforeController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.po.BsUser;
 import com.tonyj.myweb.service.BsUserService;
@@ -26,18 +27,15 @@ public class BsUserController extends BaseController {
 	@Autowired
 	private BsUserService bsUserService;
 	
-	@RequestMapping(value="/showUser",method = RequestMethod.GET)
+	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public String userIndex(BsUser user,Page page){
 		return Constant.PAGE_USER_PATH+"userIndex";
 	}
     
     @RequestMapping(value="/userData")
+    @SystemLogBeforeController(description = "查询用户列表信息")  
     public ModelAndView getUserData(HttpServletRequest request, HttpServletResponse response,BsUser user,Page page,ModelMap model){
-    	try {
-			page = bsUserService.selectPage(user,page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		page = bsUserService.selectPage(user,page);
     	model.put("page", page);
     	return new ModelAndView(Constant.PAGE_USER_PATH+"userData", model);
     }
@@ -51,6 +49,7 @@ public class BsUserController extends BaseController {
      * @return 保存操作
      */
     @RequestMapping(value="/saveUser")
+    @SystemLogBeforeController(description = "保存用户")  
     public ModelAndView saveUser(HttpServletRequest request, HttpServletResponse response,BsUser user,Page page,ModelMap model){
     	try {
 			bsUserService.saveUser(user);
@@ -67,6 +66,7 @@ public class BsUserController extends BaseController {
      * @return 根据id获取用户信息
      */
     @RequestMapping(value="/getUserById")
+    @SystemLogBeforeController(description = "根据用户id查询用户")  
     public ModelAndView getUserById(HttpServletRequest request, HttpServletResponse response,ModelMap model){
     	String id = request.getParameter("id");
     	BsUser bsUser = null;
@@ -94,6 +94,7 @@ public class BsUserController extends BaseController {
      * @return 更新用户信息
      */
     @RequestMapping(value="/updateUser")
+    @SystemLogBeforeController(description = "更新用户信息")  
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response,BsUser user,ModelMap model){
     	try {
 			bsUserService.updateUser(user);
@@ -117,6 +118,7 @@ public class BsUserController extends BaseController {
      * @return 删除用户 根据id
      */
     @RequestMapping(value="/deleteUser")
+    @SystemLogBeforeController(description = "删除用户信息")
     public ModelAndView deleteUser(HttpServletRequest request, HttpServletResponse response,ModelMap model){
     	String id = request.getParameter("id");
     	if(!"".equals(id)){

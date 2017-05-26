@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.tonyj.frame.plugin.Page;
 import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
+import com.tonyj.myweb.annotation.SystemLogBeforeController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.po.BsRole;
 import com.tonyj.myweb.service.BsRoleService;
@@ -34,6 +35,7 @@ public class BsRoleController extends BaseController {
 	}
 
 	@RequestMapping(value = "/roleData")
+	@SystemLogBeforeController(description = "查询角色列表信息")
 	public ModelAndView roleData(HttpServletRequest request,
 			HttpServletResponse response,BsRole bsRole, Page page, ModelMap model) {
 		try {
@@ -46,6 +48,7 @@ public class BsRoleController extends BaseController {
 	}
 	
 	@RequestMapping(value="/saveRole")
+	@SystemLogBeforeController(description = "保存角色信息")
 	public ModelAndView saveRole(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		BsRole bsRole = new BsRole();
 		String rolename = request.getParameter("rolename");
@@ -68,6 +71,7 @@ public class BsRoleController extends BaseController {
 	}
 	
 	@RequestMapping(value="/getRoleByPk")
+	@SystemLogBeforeController(description = "根据角色id查询角色")
 	public ModelAndView getRoleByPk(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		String id = request.getParameter("id");
 		try {
@@ -83,6 +87,7 @@ public class BsRoleController extends BaseController {
 	}
 	
 	@RequestMapping(value="/updateRole")
+	@SystemLogBeforeController(description = "更新角色信息")
 	public ModelAndView updateRole(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map map = new HashMap();
 		String rolename = request.getParameter("rolename");

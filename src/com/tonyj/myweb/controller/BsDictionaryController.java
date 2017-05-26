@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.tonyj.frame.plugin.Page;
 import com.tonyj.frame.util.MessageStreamResult;
 import com.tonyj.frame.web.BaseController;
+import com.tonyj.myweb.annotation.SystemLogBeforeController;
 import com.tonyj.myweb.constant.Constant;
 import com.tonyj.myweb.po.BsDictionary;
 import com.tonyj.myweb.service.BsDictionaryService;
@@ -36,6 +37,7 @@ public class BsDictionaryController extends BaseController {
 	}
 	
 	@RequestMapping(value="/dictData")
+	@SystemLogBeforeController(description = "查询所有数据字典信息")
 	public ModelAndView dictData(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map map = new HashMap();
 		map.put("dictName", request.getParameter("dictName"));
@@ -45,6 +47,7 @@ public class BsDictionaryController extends BaseController {
 	}
 	
 	@RequestMapping(value="/showField")
+	@SystemLogBeforeController(description = "查询字典信息对应字段的信息")
 	public ModelAndView showField(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map map = new HashMap();
 		map.put("dictCode", request.getParameter("dictCode"));
@@ -59,6 +62,7 @@ public class BsDictionaryController extends BaseController {
 	}
 	
 	@RequestMapping(value="/saveDict")
+	@SystemLogBeforeController(description = "保存字典信息")
 	public ModelAndView saveDict(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		List<BsDictionary> bsDictList = new ArrayList<BsDictionary>();
 		//封装参数
@@ -98,6 +102,7 @@ public class BsDictionaryController extends BaseController {
 	}
 	
 	@RequestMapping(value="/delDict")
+	@SystemLogBeforeController(description = "删除字典信息")
 	public ModelAndView delDict(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map map = new HashMap();
 		map.put("dicCode", request.getParameter("dicCode"));
@@ -117,6 +122,7 @@ public class BsDictionaryController extends BaseController {
 	
 
 	@RequestMapping(value="/updateDict")
+	@SystemLogBeforeController(description = "更新字典信息")
 	public ModelAndView updateDict(HttpServletRequest request, HttpServletResponse response,ModelMap model){
 		Map map = new HashMap();
 		String name = request.getParameter("name");

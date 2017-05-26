@@ -24,15 +24,15 @@ public class BsDictionaryDao extends MyBatisDao<BsDictionary> {
 		return this.getSqlSession().selectList("com.tonyj.myweb.dao.BsDictionary.getField",map);
 	}
 	
-	public void batchSaveDict(List<BsDictionary> list)throws Exception{
+	public void batchSaveDict(List<BsDictionary> list){
 		this.getSqlSession().insert("com.tonyj.myweb.dao.BsDictionary.batchSaveDict", list);
 	}
 	
-	public int delDict(Map map)throws Exception{
+	public int delDict(Map map){
 		return this.getSqlSession().delete("com.tonyj.myweb.dao.BsDictionary.delDict", map);
 	}
 	
-	public void updateDict(Map map)throws Exception{
+	public void updateDict(Map map){
 		 this.getSqlSession().update("com.tonyj.myweb.dao.BsDictionary.updateDict", map);
 	}
 }

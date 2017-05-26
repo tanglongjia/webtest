@@ -9,18 +9,18 @@
 				<table class="table-container table table-hover table-striped" id="userTable">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>TrueName</th>
-							<th>Telephone</th>
-							<th>Email</th>
-							<th>Address</th>
-							<th>Age</th>
-							<th>Sex</th>
-							<th>LoginName</th>
-							<th>PassWord</th>
-							<th>CreateTime</th>
-							<th>UserType</th>
-							<th>Accout Status</th>
+							<th>序号</th>
+							<th>真实姓名</th>
+							<th>手机号码</th>
+							<th>邮箱</th>
+							<th>地址</th>
+							<th>年龄</th>
+							<th>性别</th>
+							<th>登录用户名</th>
+							<th>登录密码</th>
+							<th>创建时间</th>
+							<th>用户类型</th>
+							<th>帐号状态</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,10 +34,10 @@
 								<td>${user.age }</td>
 								<td>
 									<c:if test="${user.sex==1 }">
-										Male
+										男
 									</c:if>
 									<c:if test="${user.sex==2 }">
-										Female
+										女
 									</c:if>
 								</td>
 								<td>${user.loginName }</td>
@@ -45,18 +45,18 @@
 								<td><fmt:formatDate value="${user.created }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>
 									<c:if test="${user.userType==0 }">
-										leader
+										管理员
 									</c:if>
 									<c:if test="${user.userType==1 }">
-										member
+										成员
 									</c:if>
 								</td>
 								<td>
 									<c:if test="${user.status==1 }">
-										Enable 
+										有效 
 									</c:if>
 									<c:if test="${user.status==0 }">
-										Disable 
+										无效 
 									</c:if>
 								</td>
 							</tr>
